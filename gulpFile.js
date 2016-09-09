@@ -8,7 +8,6 @@ var JSList = [
     './node_modules/angular-resource/angular-resource.min.js',
     './node_modules/firebase/firebase.js',
     './node_modules/angularfire/dist/angularfire.js',
-    './node_modules/lodash/lodash.min.js',
     './assets/js/tournament-app.js'
 ];
 
