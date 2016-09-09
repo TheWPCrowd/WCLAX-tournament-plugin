@@ -25,6 +25,7 @@
     "gulp-concat": "^2.6.0",
     "gulp-sass": "^2.3.2",
     "gulp-sourcemaps": "^1.6.0",
-    "gulp-watch": "^4.3.9"
+    "gulp-watch": "^4.3.9",
+    "lodash": "^4.15.0"
   }
 }

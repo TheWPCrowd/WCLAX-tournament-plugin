@@ -33,29 +33,54 @@ var wpcrowd_tournament = wpcrowd_tournament || {};
                        fireUrl: '@firebase'
                    },
                    templateUrl: tournamentObject.template_directory + 'tournament.html',
-                   controller: ['$scope', '$firebaseArray', '$firebaseObject', function( $scope, $firebaseArray, $firebaseObject ) {
+                   controller: ['$scope', '$firebaseArray', '$firebaseObject', '$http',
+                       function( $scope, $firebaseArray, $firebaseObject, $http ) {
 
-                       // Initialize Firebase
-                       var config = {
-                           apiKey: "AIzaSyCwlyDXNBxJCtNKGKz-r9XZcVlzPnHvOcA",
-                           authDomain: "wclax2016tournament.firebaseapp.com",
-                           databaseURL: "https://wclax2016tournament.firebaseio.com",
-                           storageBucket: "wclax2016tournament.appspot.com"
-                       };
-                       var mainApp = firebase.initializeApp(config);
+                           // Initialize Firebase
+                           var config = {
+                               apiKey: "AIzaSyCwlyDXNBxJCtNKGKz-r9XZcVlzPnHvOcA",
+                               authDomain: "wclax2016tournament.firebaseapp.com",
+                               databaseURL: "https://wclax2016tournament.firebaseio.com",
+                               storageBucket: "wclax2016tournament.appspot.com"
+                           };
+                           var mainApp = firebase.initializeApp(config);
 
-                       $scope.data = $firebaseArray( mainApp.database().ref('players') );
+                           $scope.data = $firebaseArray( mainApp.database().ref('players') );
 
-                       $scope.newPlayer = {
-                           score: 0
-                       };
-
-                       $scope.addNewPlayer = function() {
-                           $scope.data.$add($scope.newPlayer);
                            $scope.newPlayer = {
                                score: 0
                            };
-                       };
+
+                           $scope.addNewPlayer = function() {
+                               $scope.data.$add($scope.newPlayer);
+                               $scope.newPlayer = {
+                                   score: 0
+                               };
+                           };
+
+                           var config = {headers:  {
+                               "X-WP-NONCE" : tournamentObject.nonce
+                           }
+                           };
+
+                           $http.get('/wp-json/wp/v2/isAdmin', config).then(function(res){
+                               $scope.admin = res.data.admin;
+                           });
+
+                           $scope.foundUser = false;
+                           $scope.findByName = function( name ) {
+                               angular.forEach( $scope.data, function( value, key ) {
+                                   if( value.name.toLowerCase().indexOf(name.toLowerCase()) > -1 ) {
+                                       $scope.foundUser = $scope.data[key];
+                                       return true;
+                                   }
+                               })
+                           }
+
+                           $scope.savePoints = function() {
+                               $scope.data.$save($scope.foundUser);
+                               $scope.foundUser = false;
+                           }
 
                    }]
                } 

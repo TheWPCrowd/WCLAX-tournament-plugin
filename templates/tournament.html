@@ -2,13 +2,13 @@
     <h1 class="text-center">{{name}}</h1>
     <div class="row">
         <div class="col-sm-5">
-            <h2>Ready to take on the challenge?</h2>
+            <h2>Ready to play?</h2>
             <form ng-submit="addNewPlayer()" class="form">
                 <div class="form-group">
-                    <input type="text" ng-model="newPlayer.name" placeholder="Your Name" class="form-control" />
+                    <input required type="text" ng-model="newPlayer.name" placeholder="Your Name" class="form-control" />
                 </div>
                 <div class="form-group">
-                    <input type="email" ng-model="newPlayer.email" placeholder="Your Email" class="form-control" />
+                    <input required type="email" ng-model="newPlayer.email" placeholder="Your Email" class="form-control" />
                 </div>
 
                 <input type="submit" class="btn btn-block btn-warning" value="Enter!" />
@@ -21,6 +21,34 @@
                     {{person.name}} | <strong>Top Score: {{person.score}}</strong>
                 </li>
             </ul>
+        </div>
+    </div>
+
+    <div class="row" ng-show="admin">
+        <h2 class="text-center">ADMIN</h2>
+        <div class="col-sm-6">
+            <form class="form" ng-submit="findByName(findName)">
+                <div class="form-group">
+                    <input type="text" ng-model="findName" placeholder="Name" />
+                </div>
+                <input type="submit" value="FIND" />
+            </form>
+        </div>
+        <div class="col-sm-6">
+            <h3>Edit User</h3>
+            <div ng-hide="foundUser">Search for a user</div>
+            <form class="form" ng-submit="savePoints()" ng-show="foundUser">
+                <div class="form-group">
+                    <input required type="text" ng-model="foundUser.name" placeholder="Your Name" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <input required type="email" ng-model="foundUser.email" placeholder="Your Email" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <input required type="number" ng-model="foundUser.score" placeholder="Top Score" class="form-control" />
+                </div>
+                <input type="submit" class="btn btn-block btn-warning" value="Save" />
+            </form>
         </div>
     </div>
 </div>
