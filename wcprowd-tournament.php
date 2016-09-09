@@ -37,7 +37,7 @@ class wpcrowd_tournament {
 			'game' => 'PS4 Game'
 		), $atts );
 
-		return '<div ng-app="wpcrowd_tournament"><tournament name="' . $a['game'] . '" firebase="' . $a['firebase'] . '"></tournament></div>';
+		return '<div ng-app="wpcrowd_tournament"><tournament name="' . $a['game'] . '"></tournament></div>';
 		
 	}
 
