@@ -1,0 +1,26 @@
+<div class="container">
+    <h1 class="text-center">{{name}}</h1>
+    <div class="row">
+        <div class="col-sm-5">
+            <h2>Ready to take on the challenge?</h2>
+            <form ng-submit="addNewPlayer()" class="form">
+                <div class="form-group">
+                    <input type="text" ng-model="newPlayer.name" placeholder="Your Name" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <input type="email" ng-model="newPlayer.email" placeholder="Your Email" class="form-control" />
+                </div>
+
+                <input type="submit" class="btn btn-block btn-warning" value="Enter!" />
+            </form>
+        </div>
+        <div class="col-sm-7">
+            <h2>Current Standings</h2>
+            <ul>
+                <li ng-repeat="person in data | orderBy:'-score'">
+                    {{person.name}} | <strong>Top Score: {{person.score}}</strong>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
