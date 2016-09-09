@@ -34,15 +34,10 @@ class wpcrowd_tournament {
 		wp_enqueue_script( 'wpcrowd-tournament-script' );
 
 		$a = shortcode_atts( array(
-			'game' => 'PS4 Game',
-			'firebase' => false
+			'game' => 'PS4 Game'
 		), $atts );
-		
-		if( !$a['firebase'] ) {
-			return '<p>You need a Firebase URL to continue</p>';
-		} else {
-			return '<div ng-app="wpcrowd_tournament"><tournament name="' . $a['game'] . '" firebase="' . $a['firebase'] . '"></tournament></div>';
-		}
+
+		return '<div ng-app="wpcrowd_tournament"><tournament name="' . $a['game'] . '" firebase="' . $a['firebase'] . '"></tournament></div>';
 		
 	}
 
