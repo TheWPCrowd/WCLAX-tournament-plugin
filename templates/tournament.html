@@ -20,7 +20,7 @@
             <h2>Current Standings</h2>
             <ul>
                 <li ng-repeat="person in data | orderBy:'-score'">
-                    {{person.name}} | <strong>Top Score: {{person.score}}</strong>
+                    {{person.name}} <span ng-if="person.twitter">| @{{person.twitter}}</span> | <strong>Top Score: {{person.score}}</strong>
                 </li>
             </ul>
         </div>
